@@ -1,6 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import Card from './components/Card';
+import Cards from './components/Cards';
 
 // this works so far in the 3. render
 // let movies;
@@ -22,32 +23,32 @@ import Card from './components/Card';
 
 function App() {
 
-  let movies;
+  // let movies;
 
-  const [allMovies, setAllMovies] = useState();
-  const [filtered, setFiltered] = useState();
-  const [loading, setLoading] = useState(true);
-  const [num, setNum] = useState(4);
+  // const [allMovies, setAllMovies] = useState();
+  // const [filtered, setFiltered] = useState();
+  // const [loading, setLoading] = useState(true);
+  // const [num, setNum] = useState(4);
   
-  useEffect(() => {
-    (async() => {
-      let { movies$ } = await import('./data/movies');
-      // console.log("movies", Promise.resolve(movies$).then(console.log))
+  // useEffect(() => {
+  //   (async() => {
+  //     let { movies$ } = await import('./data/movies');
+  //     // console.log("movies", Promise.resolve(movies$).then(console.log))
       
-      // movies$.then(data => movies = data);
-      movies = await movies$.then(data => data);
-      // setTimeout(() => {console.log("asd",movies)}, 1000)
-      console.log("a", movies)
-      setAllMovies(movies)
-      setLoading(false)
-    })();
+  //     // movies$.then(data => movies = data);
+  //     movies = await movies$.then(data => data);
+  //     // setTimeout(() => {console.log("asd",movies)}, 1000)
+  //     console.log("a", movies)
+  //     setAllMovies(movies)
+  //     setLoading(false)
+  //   })();
 
-  },[])
+  // },[])
 
   return (
     <div className="App">
-      {loading ? "loading..." : "" }
-      {allMovies && allMovies.map(m => {
+      {/* {loading ? "loading..." : "" } */}
+      {/* {allMovies && allMovies.map(m => {
         return <Card 
           key={m.id} 
           id={m.id} 
@@ -56,7 +57,8 @@ function App() {
           likes={m.likes} 
           dislikes={m.dislikes} 
         />
-      })}
+      })} */}
+      <Cards />
     </div>
   );  
 }

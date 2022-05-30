@@ -1,5 +1,5 @@
 export const getMovies = async function() {
-  let { movies$ } = await import('./data/movies');
+  let { movies$ } = await import('../data/movies');
   // console.log("movies", Promise.resolve(movies$).then(console.log))
   
   // movies$.then(data => movies = data);
