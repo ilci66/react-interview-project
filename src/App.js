@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Card from './components/Card';
 
 // this works so far in the 3. render
@@ -28,25 +28,34 @@ function App() {
   const [filtered, setFiltered] = useState();
   const [loading, setLoading] = useState(true);
   const [num, setNum] = useState(4);
+  
+  useEffect(() => {
+    (async() => {
+      let { movies$ } = await import('./data/movies');
+      // console.log("movies", Promise.resolve(movies$).then(console.log))
+      
+      // movies$.then(data => movies = data);
+      movies = await movies$.then(data => data);
+      // setTimeout(() => {console.log("asd",movies)}, 1000)
+      console.log("a", movies)
+      setAllMovies(movies)
+      setLoading(false)
+    })();
 
-  (async() => {
-    let { movies$ } = await import('./data/movies');
-    // console.log("movies", Promise.resolve(movies$).then(console.log))
-    
-    // movies$.then(data => movies = data);
-    movies = await movies$.then(data => data);
-    // setTimeout(() => {console.log("asd",movies)}, 1000)
-    console.log("a", movies)
-    setAllMovies(movies)
-    setLoading(false)
-  })();
-
+  },[])
 
   return (
     <div className="App">
-      {loading ? "loading..." : "loaded" }
+      {loading ? "loading..." : "" }
       {allMovies && allMovies.map(m => {
-        return <Card id={m.id} title={m.title}category={m.category} likes={m.likes} dislikes={m.dislikes} />
+        return <Card 
+          key={m.id} 
+          id={m.id} 
+          title={m.title}
+          category={m.category}
+          likes={m.likes} 
+          dislikes={m.dislikes} 
+        />
       })}
     </div>
   );  
