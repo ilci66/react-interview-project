@@ -4,23 +4,16 @@ import { getMovies } from "../api";
 const initialState = {
   movies: [],
   status: 'idle',
-  // filter the movies when getting them
   filterCategory: "",
-  // short for item per page -- 4/8/12
-  iPP: 12
+  iPP: 12,
+  page: 1,
 };
-
-// const initialState = {
-//   movies: getMovies(),
-//   status: 'idle',
-// };
 
 
 export const getMoviesAsync = createAsyncThunk(
   'movies/fetchAllMovies',
   async () => {
     const response = await getMovies();
-    // console.log("response", response)
     return response;
   }
 );
@@ -32,17 +25,14 @@ export const moviesSlice = createSlice({
     like: (state, action) => {
       state.movies.map((movie) => { 
         if(movie.id === action.payload) {
-          movie.likes += 1; 
-          // console.log("liked  ",movie.likes); 
-          return
+          movie.likes += 1;
         }
       });
     },
     dislike: (state, action) => {
       state.movies.map((movie) => { 
         if(movie.id === action.payload) { 
-          movie.dislikes += 1; 
-          return
+          movie.dislikes += 1;
         }
       });
     },
@@ -57,7 +47,40 @@ export const moviesSlice = createSlice({
       return state.movies;
     },
     setFilter: (state, action) => {
-      state.filterCategory = action.payload;
+      if(state.filterCategory !== action.payload) {
+        state.filterCategory = action.payload;
+        state.page = 1;
+        // console.log("filter in state ==> ", state.filterCategory)
+      } else {
+        return;
+      }
+    },
+    setItemPerPage: (state, action) => {
+      state.iPP = action.payload;
+      console.log("ipp in state =>", state.ipp)
+    },
+    nextPage: (state) => {
+      const { movies, page, iPP, filterCategory } = state;
+      
+      if(filterCategory === "") {
+        if(movies.length - page*iPP <= 0) {
+          return
+        }
+      } else {
+        if(movies.filter(m => m.category === filterCategory).length - page*iPP <= 0) {
+          return
+        }
+      }
+      state.page += 1;
+      console.log("page in state ==> ",state.page)
+    },
+    previousPage: (state) => {
+      if(state.page === 1) {
+        return
+      } else {
+        state.page -= 1;
+        console.log("page in state ==> ",state.page)
+      }
     }
   },
   extraReducers: (builder) => {
@@ -75,9 +98,23 @@ export const moviesSlice = createSlice({
 });
 
 
-export const { like, dislike, deleteMovie, toggleStatus, getAllMovies } = moviesSlice.actions;
+export const { 
+  like, 
+  dislike, 
+  deleteMovie, 
+  toggleStatus, 
+  getAllMovies, 
+  setFilter, 
+  setItemPerPage, 
+  setPage,
+  nextPage,
+  previousPage 
+} = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;
+export const selectFilter = (state) => state.movies.filterCategory;
+export const selectPage = (state) => state.movies.page;
+export const selectIPP = (state) => state.movies.iPP;
 
 export const getStatus = (state) => state.movies.status;
 

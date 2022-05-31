@@ -1,7 +1,10 @@
 import './App.css';
-import { useEffect, useState } from 'react';
-import Card from './components/Card';
+// import { useEffect, useState } from 'react';
+// import Card from './components/Card';
 import Cards from './components/Cards';
+import CategoryFilter from './components/CategoryFilter';
+import Pagination from './components/Pagination';
+import cinema from './assets/dark-cinema.jpg'
 
 // this works so far in the 3. render
 // let movies;
@@ -58,8 +61,11 @@ function App() {
           dislikes={m.dislikes} 
         />
       })} */}
+      <img src={cinema} alt="A dark cinema" className='bg-img'/>
       <h1 className='main-title'>FILMS</h1>
+      <CategoryFilter />
       <Cards />
+      <Pagination />
     </div>
   );  
 }

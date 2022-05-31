@@ -1,40 +1,51 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { 
   getMoviesAsync, 
   selectMovies,
-  getStatus,
-  getAllMovies
+  selectFilter,
+  selectPage,
+  selectIPP,
 } from '../slice/movieSlice';
 import Card from './Card';
 
 const Cards = () => {
-  const [allMovies, setAllMovies] = useState();
-  const status = useSelector(getStatus);
+  const filter = useSelector(selectFilter);
   const movies = useSelector(selectMovies);
+  
+  const page = useSelector(selectPage);
+  const iPP = useSelector(selectIPP);
+
   const dispatch = useDispatch();
   
   useEffect(() => {
     dispatch(getMoviesAsync());
-  }, [])
+  }, [filter]);
 
-  useEffect(() => {
-    setAllMovies(movies);
-  }, [movies])
 
-  // console.log("all movies in cards",allMovies)
+
 
   return (<>
     {/* {movies.length} */}
-    {movies && 
-      movies.map(m => <Card
+    {movies && filter === "" ? 
+      <>{movies.slice((page-1)*iPP,page*iPP).map(m => <Card
         key={m.id} 
         id={m.id} 
         title={m.title}
         category={m.category}
         likes={m.likes} 
         dislikes={m.dislikes} 
-      />)}
+      />)}</> 
+      : 
+      movies && filter !==  "" && movies.filter(m => m.category === filter).slice((page-1)*iPP,page*iPP).map(m => <Card
+        key={m.id} 
+        id={m.id} 
+        title={m.title}
+        category={m.category}
+        likes={m.likes} 
+        dislikes={m.dislikes} 
+      />) 
+    }
   </>)
 }
 
