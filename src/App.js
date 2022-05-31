@@ -58,6 +58,7 @@ function App() {
           dislikes={m.dislikes} 
         />
       })} */}
+      <h1 className='main-title'>FILMS</h1>
       <Cards />
     </div>
   );  

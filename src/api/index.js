@@ -5,6 +5,6 @@ export const getMovies = async function() {
   // movies$.then(data => movies = data);
   let movies = await movies$.then(data => data);
   // setTimeout(() => {console.log("asd",movies)}, 1000)
-  console.log("a", movies)
+  // console.log("a", movies)
   return movies;
 };

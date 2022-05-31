@@ -4,6 +4,7 @@
   --white: #ffffffff;
   --cyan: #cbf3f0ff;
   --blue: #2ec4b6ff;
+  --red: #fd3434;
 }
 * {
   padding: 0;
@@ -18,7 +19,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--cyan);
 }
 
 code {

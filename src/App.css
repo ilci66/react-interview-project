@@ -1,9 +1,73 @@
 .App {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(76, 2, 76);
+}
+.main-title {
+  width: 100%;
+  text-align: center;
+  color: white;
+  margin: 50px 0 20px;
+  font-size: 3rem;
+
 }
 .card {
   background-color: var(--orange);
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  width: 30%;
+  min-width: 300px;
+  max-width: 400px;
+  border-radius: 15px;
+  padding: 40px 10px;
+  min-height: 400px;
+}
+.Thriller { 
+  background-color: var(--red); 
+  color: white;
+}
+.Animation { background-color: var(--cyan);}
+.Drame { background-color: var(--orange);}
+.Comedy { background-color: var(--green);}
+.movie-title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 10px 30px;
+}
+.like-dislike-numbers {
+  display: flex;
+  max-width: 50px;
+  align-items:center;
+  justify-content: center;
+  height: 100px;
+
+}
+
+.dislike-button {
+  transform: rotate(180deg);
+}
+
+.like-dislike-button {
+  transition: .4s;
+}
+
+.delete-button {
+  width: 100%;
+  border:none;
+  border-radius: 15px;
+  background-color: rgb(66, 2, 2);
+  color: white;
+  padding: 20px 0;
+  font-size: 1.2rem;
+  transition: 0.2s;
+}
+.delete-button:hover {
+  opacity: 0.9;
+  cursor: pointer;
+  transform: scale(1.02);
 }

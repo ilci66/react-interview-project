@@ -22,13 +22,12 @@ const Cards = () => {
     setAllMovies(movies);
   }, [movies])
 
-  console.log("all movies in cards",allMovies)
+  // console.log("all movies in cards",allMovies)
 
   return (<>
-    cards
     {/* {movies.length} */}
-    {allMovies && 
-      allMovies.map(m => <Card
+    {movies && 
+      movies.map(m => <Card
         key={m.id} 
         id={m.id} 
         title={m.title}

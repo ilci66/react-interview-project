@@ -4,6 +4,10 @@ import { getMovies } from "../api";
 const initialState = {
   movies: [],
   status: 'idle',
+  // filter the movies when getting them
+  filterCategory: "",
+  // short for item per page -- 4/8/12
+  iPP: 12
 };
 
 // const initialState = {
@@ -16,7 +20,7 @@ export const getMoviesAsync = createAsyncThunk(
   'movies/fetchAllMovies',
   async () => {
     const response = await getMovies();
-    console.log("response", response)
+    // console.log("response", response)
     return response;
   }
 );
@@ -29,7 +33,7 @@ export const moviesSlice = createSlice({
       state.movies.map((movie) => { 
         if(movie.id === action.payload) {
           movie.likes += 1; 
-          console.log("liked  ",movie.likes); 
+          // console.log("liked  ",movie.likes); 
           return
         }
       });
@@ -43,7 +47,7 @@ export const moviesSlice = createSlice({
       });
     },
     deleteMovie: (state, action) => {
-      state.movies.filter((movie) => movie.id !== action.payload);
+      state.movies = state.movies.filter((movie) => movie.id !== action.payload);
     },
     toggleStatus: (state) => {
       if(state.status === "idle") state.status = "loading";
@@ -51,6 +55,9 @@ export const moviesSlice = createSlice({
     },
     getAllMovies: (state) => {
       return state.movies;
+    },
+    setFilter: (state, action) => {
+      state.filterCategory = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -60,9 +67,9 @@ export const moviesSlice = createSlice({
       })
       .addCase(getMoviesAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        console.log("payload in fulfilled", action.payload)
+        // console.log("payload in fulfilled", action.payload)
         state.movies = action.payload;
-        console.log("state after fulfilled", state.movies)
+        // console.log("state after fulfilled", state.movies)
       });
   },
 });
@@ -74,10 +81,10 @@ export const selectMovies = (state) => state.movies.movies;
 
 export const getStatus = (state) => state.movies.status;
 
-// Trying writing thunk by hand
-export const incrementIfOdd = (amount) => (dispatch, getState) => {
-  const currentMovie = selectMovies(getState());
-  console.log("this is the current movie picked ",currentMovie)
-};
+// // Trying writing thunk by hand
+// export const incrementIfOdd = (amount) => (dispatch, getState) => {
+//   const currentMovie = selectMovies(getState());
+//   console.log("this is the current movie picked ",currentMovie)
+// };
 
 export default moviesSlice.reducer;
