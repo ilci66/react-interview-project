@@ -23,33 +23,38 @@ export const moviesSlice = createSlice({
   initialState,
   reducers: {
     like: (state, action) => {
-      state.movies.map((movie) => { 
+      state.movies.forEach((movie) => { 
         if(movie.id === action.payload) {
-          if(movie.liked) {
-          } else if(!movie.liked && movie.disliked) {
+          if(!movie.liked && movie.disliked) {
             movie.liked = true;
             movie.disliked = false;
             movie.likes += 1;
             movie.dislikes -= 1;
-          } else if(!movie.liked) {
+          // } else if(!movie.liked) {
+          } else if(!movie.liked && !movie.disliked) {
             movie.liked = true;
             movie.likes += 1;
+          } else if (movie.liked) {
+            movie.liked = false;
+            movie.likes -= 1;
           }
         }
       });
     },
     dislike: (state, action) => {
-      state.movies.map((movie) => { 
+      state.movies.forEach((movie) => { 
         if(movie.id === action.payload) { 
-          if(movie.disliked) {
-          } else if (movie.liked && !movie.disliked) {
+          if (movie.liked && !movie.disliked) {
             movie.liked = false;
             movie.disliked = true;
             movie.likes -= 1;
             movie.dislikes += 1;
-          } else if(!movie.disliked) {
+          } else if(!movie.disliked && !movie.liked) {
             movie.disliked = true;
             movie.dislikes += 1;
+          } else if (movie.disliked) {
+            movie.disliked = false;
+            movie.dislikes -= 1;
           }
         }
       });

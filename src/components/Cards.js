@@ -20,7 +20,7 @@ const Cards = () => {
   
   useEffect(() => {
     dispatch(getMoviesAsync());
-  }, [filter]);
+  }, [dispatch, filter]);
 
 
 
