@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { 
   getMoviesAsync, 
@@ -26,12 +26,13 @@ const Cards = () => {
 
 
   return (<>
-    {/* {movies.length} */}
     {movies && filter === "" ? 
       <>{movies.slice((page-1)*iPP,page*iPP).map(m => <Card
         key={m.id} 
         id={m.id} 
         title={m.title}
+        liked={m.liked}
+        disliked={m.disliked}
         category={m.category}
         likes={m.likes} 
         dislikes={m.dislikes} 
@@ -42,6 +43,8 @@ const Cards = () => {
         id={m.id} 
         title={m.title}
         category={m.category}
+        liked={m.liked}
+        disliked={m.disliked}
         likes={m.likes} 
         dislikes={m.dislikes} 
       />) 

@@ -1,6 +1,6 @@
 .App {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -13,24 +13,28 @@
   object-fit: cover;
 }
 .page-title-wrapper {
-  width: 100%;
-  margin: 50px 70px 20px;
+  grid-column: 1 / -1;
 }
 .main-title {
   color: white;
   font-size: 3.4rem;
 }
-
+.content-wrapper {
+  width: 100%;
+  max-width: 1980px;
+  padding: 20px 50px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 60px;
+}
 .filter-label {
   color: white;
 }
 .pagination-wrapper {
-  width: 100%;
+  grid-column: 1/-1;
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin:0 100px;
 }
 .ipp-wrapper {
   width: 100%;
@@ -61,31 +65,13 @@
 }
 .card {
   border: 4px solid white;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: 20px;
-  width: 30%;
-  min-width: 300px;
-  max-width: 360px;
   border-radius: 15px;
-  padding: 40px 10px;
+  padding: 20px 10px 40px;
   min-height: 400px;
   background-color: black;
   color: white;
 }
-/* 
-.Thriller { 
-  background-color: var(--red); 
-  color: white;
-}
-.Animation { background-color: var(--cyan);}
-.Drame { background-color: var(--orange);}
-.Comedy { 
-  background-color: var(--green);
-  color: white;
-} */
 .movie-title {
   font-weight: bold;
   font-size: 2.2rem;
@@ -94,7 +80,7 @@
 }
 .movie-category {
   width: 100%;
-  margin: 10px 30px;
+  margin-bottom: 10px;
 }
 .like-dislike-container {
   display: flex;
@@ -110,14 +96,17 @@
 .thumb-wrapper {
   display: flex;
   color: black;
-
 }
 .thumb-icon {
   font-size: 2.6rem;
   transition: .2s;
 }
+.active-icon {
+  color: var(--red);
+}
 .thumb-icon:hover {
   color: var(--red);
+  transform: scale(1.2);
   cursor: pointer;
 }
 .thumb-text {
@@ -138,4 +127,42 @@
   opacity: 0.9;
   cursor: pointer;
   transform: scale(1.02);
+}
+@media (max-width:1440px){
+  .content-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width:1220px){
+  .content-wrapper {
+    padding: 20px 40px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width:960px){
+  .content-wrapper {
+    padding: 20px;
+    grid-gap: 40px;
+  }
+  .page-title-wrapper {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width:720px){
+  .content-wrapper {
+    padding: 20px 40px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 30px;
+  }
+  .page-title-wrapper {
+    padding-top: 20px;
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 480px) {
+  .content-wrapper {
+    padding: 10px;
+    grid-gap: 10px;
+  }
+
 }

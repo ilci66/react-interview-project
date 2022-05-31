@@ -1,25 +1,25 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { 
   setItemPerPage,
-  selectIPP,
-  setPage,
-  selectPage,
   nextPage,
   previousPage
 } from '../slice/movieSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+
 
 const Pagination = () => {
   const dispatch = useDispatch();
 
-  // const page = useSelector(selectPage);
-  // const iPP = useSelector(selectIPP);
 
   return (
     <div className='pagination-wrapper'>
-      <button className='pagination-button' onClick={() => dispatch(previousPage())}>
-        Prev
-      </button>
+      <FontAwesomeIcon 
+        className='pagination-button'
+        onClick={() => dispatch(previousPage())}
+        icon={faArrowLeft} 
+      /> 
       <div className='ipp-wrapper'>
         <select 
           onChange={e => dispatch(setItemPerPage(e.target.value))} 
@@ -31,11 +31,11 @@ const Pagination = () => {
           <option value="4">4</option>
         </select>  
       </div>
-      {/* <p>current page is: {page}</p>
-      <p>current ipp is: {iPP}</p> */}
-      <button className='pagination-button' onClick={() => dispatch(nextPage())}>
-        Next
-      </button>
+      <FontAwesomeIcon 
+        className='pagination-button'
+        onClick={() => dispatch(nextPage())}
+        icon={faArrowRight} 
+      /> 
     </div>
   )
 }

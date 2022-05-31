@@ -24,37 +24,43 @@ export const moviesSlice = createSlice({
   reducers: {
     like: (state, action) => {
       state.movies.map((movie) => { 
-        if(movie.id === action.payload && movie.liked === false) {
-          if(movie.disliked) movie.disliked = false; movie.likes -= 1;
-          movie.likes += 1;
-          movie.liked = true;
+        if(movie.id === action.payload) {
+          if(movie.liked) {
+          } else if(!movie.liked && movie.disliked) {
+            movie.liked = true;
+            movie.disliked = false;
+            movie.likes += 1;
+            movie.dislikes -= 1;
+          } else if(!movie.liked) {
+            movie.liked = true;
+            movie.likes += 1;
+          }
         }
       });
     },
     dislike: (state, action) => {
       state.movies.map((movie) => { 
-        if(movie.id === action.payload && movie.disliked === false) { 
-          if(movie.disliked) movie.liked = false; movie.dislikes -= 1;
-          movie.dislikes += 1;
-          movie.disliked = true;
+        if(movie.id === action.payload) { 
+          if(movie.disliked) {
+          } else if (movie.liked && !movie.disliked) {
+            movie.liked = false;
+            movie.disliked = true;
+            movie.likes -= 1;
+            movie.dislikes += 1;
+          } else if(!movie.disliked) {
+            movie.disliked = true;
+            movie.dislikes += 1;
+          }
         }
       });
     },
     deleteMovie: (state, action) => {
       state.movies = state.movies.filter((movie) => movie.id !== action.payload);
     },
-    toggleStatus: (state) => {
-      if(state.status === "idle") state.status = "loading";
-      else { state.status = "idle" }
-    },
-    getAllMovies: (state) => {
-      return state.movies;
-    },
     setFilter: (state, action) => {
       if(state.filterCategory !== action.payload) {
         state.filterCategory = action.payload;
         state.page = 1;
-        // console.log("filter in state ==> ", state.filterCategory)
       } else {
         return;
       }
@@ -64,8 +70,6 @@ export const moviesSlice = createSlice({
         state.page = 1
       }
       state.iPP = action.payload;
-      
-      console.log("ipp in state =>", state.ipp)
     },
     nextPage: (state) => {
       const { movies, page, iPP, filterCategory } = state;
@@ -80,14 +84,12 @@ export const moviesSlice = createSlice({
         }
       }
       state.page += 1;
-      console.log("page in state ==> ",state.page)
     },
     previousPage: (state) => {
       if(state.page === 1) {
         return
       } else {
         state.page -= 1;
-        console.log("page in state ==> ",state.page)
       }
     }
   },
@@ -98,13 +100,9 @@ export const moviesSlice = createSlice({
       })
       .addCase(getMoviesAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        // console.log("payload in fulfilled", action.payload)
-
-        // add like and dislkied while saving
         let toSave = action.payload.map(i => i = {...i,liked: false, disliked: false})
 
         state.movies = toSave;
-        // console.log("state after fulfilled", state.movies)
       });
   },
 });
@@ -129,11 +127,5 @@ export const selectPage = (state) => state.movies.page;
 export const selectIPP = (state) => state.movies.iPP;
 
 export const getStatus = (state) => state.movies.status;
-
-// // Trying writing thunk by hand
-// export const incrementIfOdd = (amount) => (dispatch, getState) => {
-//   const currentMovie = selectMovies(getState());
-//   console.log("this is the current movie picked ",currentMovie)
-// };
 
 export default moviesSlice.reducer;
