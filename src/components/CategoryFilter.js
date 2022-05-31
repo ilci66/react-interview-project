@@ -10,7 +10,6 @@ const CategoryFilter = () => {
 
   return (
     <div className='filter-wrapper'>
-      <label className='filter-label' htmlFor='categories'>Catégorie</label>
       <select 
         onChange={e => dispatch(setFilter(e.target.value))} 
         name="categories" 

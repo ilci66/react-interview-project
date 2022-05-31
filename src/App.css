@@ -6,30 +6,21 @@
 }
 .bg-img {
   position: fixed;
-  filter: brightness(50%);
   z-index: -1;
   top: 0;
   width: 100vw;
   height: 100vh;
   object-fit: cover;
 }
+.page-title-wrapper {
+  width: 100%;
+  margin: 50px 70px 20px;
+}
 .main-title {
-  width: 100%;
-  text-align: center;
   color: white;
-  margin: 50px 0 20px;
   font-size: 3.4rem;
+}
 
-}
-.filter-wrapper {
-  width: 100%;
-  font-size: 1.4rem;
-  padding: 10px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .filter-label {
   color: white;
 }
@@ -40,6 +31,15 @@
   justify-content: space-around;
   align-items: center;
   margin:0 100px;
+}
+.ipp-wrapper {
+  width: 100%;
+  font-size: 1.4rem;
+  padding: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .pagination-label {
   color: white;
@@ -72,8 +72,10 @@
   border-radius: 15px;
   padding: 40px 10px;
   min-height: 400px;
+  background-color: black;
+  color: white;
 }
-
+/* 
 .Thriller { 
   background-color: var(--red); 
   color: white;
@@ -83,35 +85,50 @@
 .Comedy { 
   background-color: var(--green);
   color: white;
-}
+} */
 .movie-title {
   font-weight: bold;
   font-size: 2.2rem;
   margin: 10px 30px;
   min-height: 140px;
 }
-.like-dislike-numbers {
+.movie-category {
+  width: 100%;
+  margin: 10px 30px;
+}
+.like-dislike-container {
   display: flex;
-  max-width: 50px;
+  flex-direction: row;
+  width: 100%;
   align-items:center;
-  justify-content: center;
-  height: 100px;
+  justify-content: space-around;
+  min-height: 60px;
+  background-color: var(--white);
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+.thumb-wrapper {
+  display: flex;
+  color: black;
 
 }
-
-.dislike-button {
-  transform: rotate(180deg);
+.thumb-icon {
+  font-size: 2.6rem;
+  transition: .2s;
 }
-
-.like-dislike-button {
-  transition: .4s;
+.thumb-icon:hover {
+  color: var(--red);
+  cursor: pointer;
 }
-
+.thumb-text {
+  font-size: 1.4rem;
+  margin-left: 20px;
+}
 .delete-button {
   width: 100%;
   border:none;
   border-radius: 15px;
-  background-color: rgb(66, 2, 2);
+  background-color: var(--red);
   color: white;
   padding: 20px 0;
   font-size: 1.2rem;

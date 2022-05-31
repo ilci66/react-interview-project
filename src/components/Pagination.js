@@ -20,8 +20,7 @@ const Pagination = () => {
       <button className='pagination-button' onClick={() => dispatch(previousPage())}>
         Prev
       </button>
-      <div className='filter-wrapper'>
-        <label className='pagination-label' htmlFor='categories'>Item Per Page</label>
+      <div className='ipp-wrapper'>
         <select 
           onChange={e => dispatch(setItemPerPage(e.target.value))} 
           name="categories" 

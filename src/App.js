@@ -5,6 +5,9 @@ import Cards from './components/Cards';
 import CategoryFilter from './components/CategoryFilter';
 import Pagination from './components/Pagination';
 import cinema from './assets/dark-cinema.jpg'
+import popcorn from './assets/popcorn.jpg'
+import redCurtain from './assets/red-curtain.jpg'
+
 
 // this works so far in the 3. render
 // let movies;
@@ -61,9 +64,11 @@ function App() {
           dislikes={m.dislikes} 
         />
       })} */}
-      <img src={cinema} alt="A dark cinema" className='bg-img'/>
-      <h1 className='main-title'>FILMS</h1>
-      <CategoryFilter />
+      <img src={redCurtain} alt="A dark cinema" className='bg-img'/>
+      <div className='page-title-wrapper'>
+        <h1 className='main-title'>FILMS</h1>
+        <CategoryFilter />
+      </div>
       <Cards />
       <Pagination />
     </div>

@@ -24,15 +24,19 @@ export const moviesSlice = createSlice({
   reducers: {
     like: (state, action) => {
       state.movies.map((movie) => { 
-        if(movie.id === action.payload) {
+        if(movie.id === action.payload && movie.liked === false) {
+          if(movie.disliked) movie.disliked = false; movie.likes -= 1;
           movie.likes += 1;
+          movie.liked = true;
         }
       });
     },
     dislike: (state, action) => {
       state.movies.map((movie) => { 
-        if(movie.id === action.payload) { 
+        if(movie.id === action.payload && movie.disliked === false) { 
+          if(movie.disliked) movie.liked = false; movie.dislikes -= 1;
           movie.dislikes += 1;
+          movie.disliked = true;
         }
       });
     },
@@ -56,7 +60,11 @@ export const moviesSlice = createSlice({
       }
     },
     setItemPerPage: (state, action) => {
+      if(state.page !== 1) {
+        state.page = 1
+      }
       state.iPP = action.payload;
+      
       console.log("ipp in state =>", state.ipp)
     },
     nextPage: (state) => {
@@ -91,7 +99,11 @@ export const moviesSlice = createSlice({
       .addCase(getMoviesAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         // console.log("payload in fulfilled", action.payload)
-        state.movies = action.payload;
+
+        // add like and dislkied while saving
+        let toSave = action.payload.map(i => i = {...i,liked: false, disliked: false})
+
+        state.movies = toSave;
         // console.log("state after fulfilled", state.movies)
       });
   },

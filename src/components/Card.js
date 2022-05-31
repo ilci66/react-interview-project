@@ -9,6 +9,8 @@ import {
   selectMovies,
   toggleStatus
 } from '../slice/movieSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons';
 
 const Card = ({ id, title, category, likes, dislikes}) => {
   // const movies = useSelector(selectMovies);
@@ -31,9 +33,15 @@ const Card = ({ id, title, category, likes, dislikes}) => {
       {/* <p>id: {id}</p> */}
       <p className='movie-title'>{title}</p>
       <p className='movie-category'>{category}</p>
-      <div className='like-dislike-numbers'>
-        <img src={thumb} className="like-button" alt="logo" /> <p>{likes}</p>
-        <img src={thumb} className="dislike-button" alt="logo" /><p>{dislikes} </p>
+      <div className='like-dislike-container'>
+        <div className='thumb-wrapper'>
+          <FontAwesomeIcon className='thumb-icon' icon={faThumbsUp}></FontAwesomeIcon> 
+          <p className='thumb-text'>{likes}</p>
+        </div>
+        <div className='thumb-wrapper'>
+          <FontAwesomeIcon className='thumb-icon' icon={faThumbsDown}></FontAwesomeIcon> 
+          <p  className='thumb-text'>{dislikes}</p>
+        </div>
       </div>
       {/* <button onClick={() => console.log(id)}>
         test
@@ -47,9 +55,9 @@ const Card = ({ id, title, category, likes, dislikes}) => {
       {/* <button onClick={() => dispatch(toggleStatus())}>
         Toggle Status: {status}
       </button> */}
-      <button className='like-dislike-button' onClick={() => handleLikeDislike()}>
+      {/* <button className='like-dislike-button' onClick={() => handleLikeDislike()}>
         {likeStatus}, <img src={thumb} className={`thumbs-up-svg ${likeStatus}-button`} alt="logo" />
-      </button>
+      </button> */}
       <button className='delete-button' onClick={() => dispatch(deleteMovie(id))}>
         SUPPRIMER
       </button>
@@ -57,4 +65,4 @@ const Card = ({ id, title, category, likes, dislikes}) => {
   )
 }
 
-export default Card
+export default Card 
