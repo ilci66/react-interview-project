@@ -117,8 +117,6 @@ export const {
   like, 
   dislike, 
   deleteMovie, 
-  toggleStatus, 
-  getAllMovies, 
   setFilter, 
   setItemPerPage, 
   setPage,
