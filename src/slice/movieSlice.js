@@ -6,6 +6,11 @@ const initialState = {
   status: 'idle',
 };
 
+// const initialState = {
+//   movies: getMovies(),
+//   status: 'idle',
+// };
+
 
 export const getMoviesAsync = createAsyncThunk(
   'movies/fetchAllMovies',
@@ -21,10 +26,21 @@ export const moviesSlice = createSlice({
   initialState,
   reducers: {
     like: (state, action) => {
-      state.movies.map((movie) => { if(movie.id === action.payload)  movie.likes += 1; console.log("liked  ",movie.likes); return});
+      state.movies.map((movie) => { 
+        if(movie.id === action.payload) {
+          movie.likes += 1; 
+          console.log("liked  ",movie.likes); 
+          return
+        }
+      });
     },
     dislike: (state, action) => {
-      state.movies.map((movie) => { if(movie.id === action.payload)  movie.dislikes += 1; return});
+      state.movies.map((movie) => { 
+        if(movie.id === action.payload) { 
+          movie.dislikes += 1; 
+          return
+        }
+      });
     },
     deleteMovie: (state, action) => {
       state.movies.filter((movie) => movie.id !== action.payload);
