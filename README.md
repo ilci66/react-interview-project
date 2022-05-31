@@ -19,3 +19,9 @@ Prenez des initiatives, il y a des points bonus si
 * Il y a une attention aux détails
 
 /!\ La suppression du comportement asynchrone dans `movies.js` entraînera une annulation du test.
+
+
+# Notes Personnelles
+
+* Je pense que le comportement responsive que vous avez décrit est flexbox mais je pense que la grid fonctionne mieux dans ce cas particulier
+* Car il n'y a pas de back-end approprié et au lieu de filtrer mes données avant de les obtenir, je filtre mes données dans le front-end

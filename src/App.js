@@ -7,9 +7,6 @@ import Pagination from './components/Pagination';
 import redCurtain from './assets/red-curtain.jpg'
 
 
-
-
-
 function App() {
 
   return (

@@ -1,12 +1,15 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { 
-  setFilter
+  setFilter,
+  selectMovies
 } from '../slice/movieSlice';
 
 
 const CategoryFilter = () => {
   const dispatch = useDispatch();
+  const movies = useSelector(selectMovies);
+  const categoriesArray = [...new Set(movies.map(m => m.category))]
 
   return (
     <div className='filter-wrapper'>
@@ -16,9 +19,7 @@ const CategoryFilter = () => {
         id="categories"
       >
         <option value="">Tous Les Films</option>
-        <option value="Comedy">Comedy</option>
-        <option value="Thriller">Thriller</option>
-        <option value="Drame">Drame</option>
+        {categoriesArray && categoriesArray.map(c => <option value={c}>{c}</option>)}
       </select>  
     </div>
   )

@@ -26,8 +26,9 @@ const Cards = () => {
 
 
   return (<>
+    {/* <CategoryFilter movies={}/> */}
     {movies && filter === "" ? 
-      <>{movies.slice((page-1)*iPP,page*iPP).map(m => <Card
+      <>{movies.slice((page-1)*iPP, page*iPP).map(m => <Card
         key={m.id} 
         id={m.id} 
         title={m.title}
@@ -38,7 +39,7 @@ const Cards = () => {
         dislikes={m.dislikes} 
       />)}</> 
       : 
-      movies && filter !==  "" && movies.filter(m => m.category === filter).slice((page-1)*iPP,page*iPP).map(m => <Card
+      movies && filter !==  "" && movies.filter(m => m.category === filter).slice((page-1)*iPP, page*iPP).map(m => <Card
         key={m.id} 
         id={m.id} 
         title={m.title}
